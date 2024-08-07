@@ -1,12 +1,14 @@
 version: 0.0
- resources:
-    - myLAmbdaFunction:
-        Type: AWS::Lambda::Function
-        Properties:
-            Name: github-to-lambda-demo
-            Alias: production-lambda
-            #CurrentVersion: "1"
-            #TargetVersion: "2"
+resources:
+  - myLambdaFunction:
+      Type: AWS::Lambda::Function
+      Properties:
+        Name: github-to-lambda-demo
+        Alias: production-lambda
 hooks:
-    - BeforeAllowTraffic: "LambdaFunctionToValidateBeforeTrafficShift"
-    - AfterAllowTraffic: "LambdaFunctionToValidateAfterTrafficShift
+  BeforeAllowTraffic:
+    - location: LambdaFunctionToValidateBeforeTrafficShift
+      timeout: 300
+  AfterAllowTraffic:
+    - location: LambdaFunctionToValidateAfterTrafficShift
+      timeout: 300
