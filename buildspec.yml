@@ -14,8 +14,8 @@ phases:
       #- cd ..
       - zip -g deployment_package.zip lambda_function.py contactus.html success.html
   artifacts:
-   files:
-    - deployment_package.zip
+    files:
+      - deployment_package.zip
   post_build:
     commands:
       - echo "Updating lambda Function..."
