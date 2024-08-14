@@ -1,6 +1,6 @@
 version: 1.0
 resources:
-  - myLambdaFunction:
+  - github-to-lambda-demo:
       Type: AWS::Lambda::Function
       Properties:
         Name: github-to-lambda-demo
