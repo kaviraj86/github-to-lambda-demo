@@ -22,6 +22,7 @@ phases:
       #- ls -la  # List directory contents after build
       - zip -q -x  *.git* -r artifact.zip .
       - aws lambda update-function-code --region=us-east-1 --function-name github-to-lambda-demo --zip-file fileb://artifact.zip
+      - aws lambda get-function --function-name github-to-lambda-demo --query 'Configuration.[State, LastUpdateStatus]'
       - newVersion=$(aws lambda publish-version --region=us-east-1 --function-name github-to-lambda-demo --query Version --output text)
       - currentVersion=$(aws lambda get-alias --region=us-east-1 --function-name github-to-lambda-demo --name production --query FunctionVersion --output text)
       - sed -i "s/%currentVersion%/${currentVersion}/g" appspec.yaml
