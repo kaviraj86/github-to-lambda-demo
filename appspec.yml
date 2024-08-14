@@ -5,8 +5,8 @@ resources:
       Properties:
         Name: github-to-lambda-demo
         Alias: production-lambda
-        currentversion: 1.0
-        targetversion: 1.1
+        currentversion: "%currentVersion%"
+        targetversion: "%targetVersion%"
 hooks:
   BeforeAllowTraffic:
     - location: LambdaFunctionToValidateBeforeTrafficShift
