@@ -1,10 +1,12 @@
-version: 1.0
+version: 0.0
 resources:
   - github-to-lambda-demo:
       Type: AWS::Lambda::Function
       Properties:
         Name: github-to-lambda-demo
         Alias: production-lambda
+        currentversion: 1.0
+        targetversion: 1.1
 hooks:
   BeforeAllowTraffic:
     - location: LambdaFunctionToValidateBeforeTrafficShift
@@ -12,3 +14,4 @@ hooks:
   AfterAllowTraffic:
     - location: LambdaFunctionToValidateAfterTrafficShift
       timeout: 300
+ 
