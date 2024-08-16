@@ -27,10 +27,10 @@ phases:
       - aws lambda get-function --function-name github-to-lambda-demo --query 'Configuration.[State, LastUpdateStatus]'
       - newVersion=$(aws lambda publish-version --region=us-east-1 --function-name github-to-lambda-demo --query Version --output text)
       - currentVersion=$(aws lambda get-alias --region=us-east-1 --function-name github-to-lambda-demo --name production --query FunctionVersion --output text)
-      #- sed -i "s/%currentVersion%/${currentVersion}/g" appspec.yaml
-      #- sed -i "s/%targetVersion%/${newVersion}/g" appspec.yaml
-     # - aws s3 cp appspec.yaml s3://lambdaarti/
-     # - aws deploy create-deployment --region=us-east-1 --application-name github-to-lambda-demo --deployment-group-name poc-group --s3-location bucket=lambdaarti/,bundleType=yaml,key=appspec.yaml
+      - sed -i "s/%currentVersion%/${currentVersion}/g" appspec.yaml
+      - sed -i "s/%targetVersion%/${newVersion}/g" appspec.yaml
+      - aws s3 cp appspec.yaml s3://lambda-14/file/
+      - aws deploy create-deployment --region=us-east-1 --application-name github-to-lambda-demo --deployment-group-name lambda_group --s3-location bucket=lambda-14/file/,bundleType=yaml,key=appspec.yaml
 #artifacts:
  # files:
   #  - lambda_function.zip
