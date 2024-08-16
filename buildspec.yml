@@ -31,6 +31,9 @@ phases:
       #- sed -i "s/%targetVersion%/${newVersion}/g" appspec.yaml
       #- aws s3 cp appspec.yaml s3://lambda-14/file/
       - aws deploy create-deployment --region=us-east-1 --application-name Lambda_app --deployment-group-name lambda_group --s3-location bucket=lambda-14/file/,bundleType=yaml,key=appspec.yaml
-#artifacts:
- # files:
-  #  - lambda_function.zip
+artifacts:
+  files:
+     - artifact.zip
+     - name: secondary-artifact-name
+     - discard-paths: no 
+     - base-directory: location
