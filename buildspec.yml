@@ -24,7 +24,7 @@ phases:
       - zip -q -x  *.git* -r artifact.zip .
       - aws lambda update-function-code --region=us-east-1 --function-name github-to-lambda-demo --zip-file fileb://artifact.zip
       #- aws lambda wait function-updated --function-name github-to-lambda-demo
-      - aws lambda get-function --function-name github-to-lambda-demo --query 'Configuration.[State, LastUpdateStatus]'
+      #- aws lambda get-function --function-name github-to-lambda-demo --query 'Configuration.[State, LastUpdateStatus]'
       - newVersion=$(aws lambda publish-version --region=us-east-1 --function-name github-to-lambda-demo --query Version --output text)
       - currentVersion=$(aws lambda get-alias --region=us-east-1 --function-name github-to-lambda-demo --name production --query FunctionVersion --output text)
       - echo "phase completed"
