@@ -47,7 +47,7 @@ def page_router(httpmethod, querystring, formbody):
 def insert_record(formbody):
     formbody = formbody.replace("=", "' : '")
     formbody = formbody.replace("&", "', '")
-    formbody = "INSERT INTO table value {'" + formbody + "'}"
+    formbody = "INSERT INTO awspoctable value {'" + formbody + "'}"
 
     client = boto3.client('dynamodb')
     response = client.execute_statement(Statement=formbody)
